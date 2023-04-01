@@ -13,12 +13,12 @@ function App() {
     getCurrentWeather(city, units).then((data) => setInfo(data));
 
     return () => {};
-  }, []);
+  }, [city]);
 
   return (
     <div className="text-slate-50 md:flex">
       {info == null && <BeatLoader color="#36d7b7" />}
-      {info != null && <Sidebar info={info} units={units} />}
+      {info != null && <Sidebar info={info} units={units} setCity={setCity} />}
       <Forecast />
     </div>
   );

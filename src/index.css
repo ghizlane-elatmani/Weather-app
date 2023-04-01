@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.echo {
+  border: 3px solid purple;
+  border-radius: 5px;
+  animation-name: echo-ping;
+  animation-duration: 700ms;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes echo-ping {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: purple;
+  }
+}

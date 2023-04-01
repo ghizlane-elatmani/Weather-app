@@ -1,15 +1,28 @@
 import { useState } from "react";
-import SearchBar from "./SearchBar";
+import { BiCurrentLocation } from "react-icons/bi";
+import FullSearch from "./Search/FullSearch";
 import { BiMap } from "react-icons/bi";
 import { getDayName } from "../service/date-service";
 
-const Sidebar = ({ info, units }) => {
-  const [showSearch, setShowSearch] = useState(false);
+const Sidebar = ({ info, units, setCity }) => {
+  const [fullSearch, setFullSearch] = useState(false);
 
   return (
-    <div className="bg-slate-800 py-7 px-5 md:px-10 min-h-screen md:min-w-[40%] lg:min-w-[30%] flex flex-col gap-10 justify-between">
-      <SearchBar />
+    <div className="bg-slate-800 py-7 px-5 md:px-10 min-h-screen md:min-w-[40%] lg:min-w-[30%] flex flex-col gap-10 justify-between relative">
+      {/* SEARCH BAR */}
+      <div className="flex justify-between items-center">
+        <button
+          onClick={() => setFullSearch(!fullSearch)}
+          className="bg-neutral-500 text-sm lg:text-md hover:bg-neutral-600 duration p-2 px-4 rounded-sm"
+        >
+          Search for places
+        </button>
+        <button className="bg-neutral-500 hover:bg-neutral-600 duration w-10 h-10 rounded-full flex justify-center items-center">
+          <BiCurrentLocation />
+        </button>
+      </div>
 
+      {/* CURRENT WEATHER INFO */}
       <div className="flex flex-col gap-10">
         <img
           src={`https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`}
@@ -24,6 +37,7 @@ const Sidebar = ({ info, units }) => {
         </div>
       </div>
 
+      {/* LOCATION AND DATE */}
       <div className="flex flex-col gap-3 items-center">
         <div className="flex gap-4">
           <p>Today</p> <p>⋅</p> <p>{getDayName()}</p>
@@ -32,6 +46,11 @@ const Sidebar = ({ info, units }) => {
           <BiMap /> {info.name}
         </p>
       </div>
+
+      {/* FULL SEARCH */}
+      {fullSearch && (
+        <FullSearch setFullSearch={setFullSearch} setCity={setCity} />
+      )}
     </div>
   );
 };
