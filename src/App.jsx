@@ -11,15 +11,21 @@ function App() {
 
   useEffect(() => {
     getCurrentWeather(city, units).then((data) => setInfo(data));
-
     return () => {};
   }, [city]);
 
   return (
     <div className="text-slate-50 md:flex">
-      {info == null && <BeatLoader color="#36d7b7" />}
-      {info != null && <Sidebar info={info} units={units} setCity={setCity} />}
-      <Forecast />
+      {info == null ? (
+        <div className="bg-slate-800 w-full min-h-screen flex justify-center items-center">
+          <BeatLoader color="#10b981" />
+        </div>
+      ) : (
+        <>
+          <Sidebar info={info} units={units} setCity={setCity} />
+          <Forecast />
+        </>
+      )}
     </div>
   );
 }

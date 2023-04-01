@@ -33,18 +33,21 @@ const FullSearch = ({ setFullSearch, setCity }) => {
         className="flex gap-2 justify-between items-center mb-10 p-2"
         onSubmit={handleSubmit}
       >
-        <div className="flex items-center border p-2 flex-1">
+        <div className="flex items-center border rounded-sm p-2 flex-1">
           <BiSearch className="" />
           <input
             onChange={(e) => setCityName(e.target.value)}
             value={cityName}
             type="text"
             placeholder="search location"
-            className="overflow-hidden w-full flex-1 px-1 bg-slate-800 focus:outline-0"
+            className="overflow-hidden w-full flex-1 px-1 bg-slate-800 focus:outline-0 text-sm lg:text-md"
           />
         </div>
 
-        <button type="submit" className="bg-blue-500 p-2 rounded-sm">
+        <button
+          type="submit"
+          className="bg-blue-500 p-2 rounded-sm text-sm lg:text-md"
+        >
           Search
         </button>
       </form>
@@ -53,7 +56,7 @@ const FullSearch = ({ setFullSearch, setCity }) => {
       <ul>
         <li
           onClick={() => handleClick("London")}
-          className="cursor-pointer group flex justify-between items-center py-3 px-2 border border-slate-800 hover:border-slate-700 mb-4"
+          className="cursor-pointer group rounded-sm flex justify-between items-center py-3 px-2 border border-slate-800 hover:border-slate-700 mb-4"
         >
           <p>London</p>
           <BiChevronRight className="opacity-0 group-hover:opacity-100" />
@@ -61,7 +64,7 @@ const FullSearch = ({ setFullSearch, setCity }) => {
 
         <li
           onClick={() => handleClick("Barcelona")}
-          className="cursor-pointer group flex justify-between items-center py-3 px-2 border border-slate-800 hover:border-slate-700 mb-4"
+          className="cursor-pointer group rounded-sm flex justify-between items-center py-3 px-2 border border-slate-800 hover:border-slate-700 mb-4"
         >
           <p>Barcelona</p>
           <BiChevronRight className="opacity-0 group-hover:opacity-100" />
@@ -69,7 +72,7 @@ const FullSearch = ({ setFullSearch, setCity }) => {
 
         <li
           onClick={() => handleClick("Long Beach")}
-          className="cursor-pointer group flex justify-between items-center py-3 px-2 border border-slate-800 hover:border-slate-700 mb-4"
+          className="cursor-pointer group rounded-sm flex justify-between items-center py-3 px-2 border border-slate-800 hover:border-slate-700 mb-4"
         >
           <p>Long Beach</p>
           <BiChevronRight className="opacity-0 group-hover:opacity-100" />
