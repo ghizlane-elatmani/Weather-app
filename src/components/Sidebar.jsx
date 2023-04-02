@@ -4,8 +4,16 @@ import FullSearch from "./Search/FullSearch";
 import { BiMap } from "react-icons/bi";
 import { getDayName } from "../service/date-service";
 
-const Sidebar = ({ info, units, setCity }) => {
+const Sidebar = ({ info, units, setCity, setIsLocation, setLat, setLon }) => {
   const [fullSearch, setFullSearch] = useState(false);
+
+  function handleLocation() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLat(position.coords.latitude);
+      setLon(position.coords.longitude);
+      setIsLocation(true);
+    });
+  }
 
   return (
     <div className="bg-slate-800 py-7 px-5 md:px-10 min-h-screen md:min-w-[40%] lg:min-w-[30%] flex flex-col gap-10 justify-between relative">
@@ -17,7 +25,10 @@ const Sidebar = ({ info, units, setCity }) => {
         >
           Search for places
         </button>
-        <button className="bg-neutral-500 hover:bg-neutral-600 duration w-10 h-10 rounded-full flex justify-center items-center">
+        <button
+          onClick={() => handleLocation()}
+          className="bg-neutral-500 hover:bg-neutral-600 duration w-10 h-10 rounded-full flex justify-center items-center"
+        >
           <BiCurrentLocation />
         </button>
       </div>
@@ -49,7 +60,11 @@ const Sidebar = ({ info, units, setCity }) => {
 
       {/* FULL SEARCH */}
       {fullSearch && (
-        <FullSearch setFullSearch={setFullSearch} setCity={setCity} />
+        <FullSearch
+          setFullSearch={setFullSearch}
+          setCity={setCity}
+          setIsLocation={setIsLocation}
+        />
       )}
     </div>
   );

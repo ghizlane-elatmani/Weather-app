@@ -1,18 +1,32 @@
 import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Forecast from "./components/Forecast";
-import { getCurrentWeather } from "./service/api-service";
+import {
+  getCurrentWeatherByCity,
+  getCurrentWeatherByLocation,
+} from "./service/api-service";
 import { BeatLoader } from "react-spinners";
 
 function App() {
   const [city, setCity] = useState("Rabat");
   const [units, setUnits] = useState("metric");
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
   const [info, setInfo] = useState(null);
+  const [infoDays, setInfoDays] = useState(null);
+  // Flag to know witch method to use - getCurrentWeatherByCity or getCurrentWeatherByLocation
+  const [isLocation, setIsLocation] = useState(false);
 
   useEffect(() => {
-    getCurrentWeather(city, units).then((data) => setInfo(data));
-    return () => {};
-  }, [city]);
+    if (isLocation) {
+      getCurrentWeatherByLocation(lat, lon, units).then((data) =>
+        setInfo(data)
+      );
+    } else {
+      getCurrentWeatherByCity(city, units).then((data) => setInfo(data));
+      return () => {};
+    }
+  }, [city, units, isLocation]);
 
   return (
     <div className="text-slate-50 md:flex">
@@ -22,7 +36,14 @@ function App() {
         </div>
       ) : (
         <>
-          <Sidebar info={info} units={units} setCity={setCity} />
+          <Sidebar
+            info={info}
+            units={units}
+            setCity={setCity}
+            setIsLocation={setIsLocation}
+            setLat={setLat}
+            setLon={setLon}
+          />
           <Forecast />
         </>
       )}

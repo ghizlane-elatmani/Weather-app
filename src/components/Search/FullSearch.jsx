@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiSearch, BiX, BiChevronRight } from "react-icons/bi";
 
-const FullSearch = ({ setFullSearch, setCity }) => {
+const FullSearch = ({ setFullSearch, setCity, setIsLocation }) => {
   const [cityName, setCityName] = useState("");
 
   function handleSubmit(e) {
@@ -9,11 +9,13 @@ const FullSearch = ({ setFullSearch, setCity }) => {
     e.preventDefault();
     setCity(cityName);
     setFullSearch(false);
+    setIsLocation(false);
   }
 
   function handleClick(cityName) {
     setCity(cityName);
     setFullSearch(false);
+    setIsLocation(false);
   }
 
   return (
