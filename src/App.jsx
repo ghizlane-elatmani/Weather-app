@@ -4,6 +4,8 @@ import Forecast from "./components/Forecast";
 import {
   getCurrentWeatherByCity,
   getCurrentWeatherByLocation,
+  get5DaysWeatherForecastByCity,
+  get5DaysWeatherForecastByLocation,
 } from "./service/api-service";
 import { BeatLoader } from "react-spinners";
 
@@ -24,6 +26,11 @@ function App() {
       );
     } else {
       getCurrentWeatherByCity(city, units).then((data) => setInfo(data));
+      get5DaysWeatherForecastByCity(city, units).then((data) =>
+        setInfoDays(data)
+      );
+
+      console.log(infoDays);
       return () => {};
     }
   }, [city, units, isLocation]);
@@ -44,7 +51,12 @@ function App() {
             setLat={setLat}
             setLon={setLon}
           />
-          <Forecast />
+          <Forecast
+            units={units}
+            setUnits={setUnits}
+            info={info}
+            infoDays={infoDays}
+          />
         </>
       )}
     </div>

@@ -40,8 +40,11 @@ const Sidebar = ({ info, units, setCity, setIsLocation, setLat, setLon }) => {
           alt=""
           className="m-auto"
         />
-        <div className="text-3xl md:text-4xl lg:text-5xl text-center">
-          {info.main.temp} {units == "metric" ? "°C" : "°F"}
+        <div className="text-3xl md:text-2xl lg:text-3xl text-center text-neutral-400">
+          <span className="text-6xl text-slate-50">
+            {info.main.temp.toFixed(0)}
+          </span>{" "}
+          {units == "metric" ? "°C" : "°F"}
         </div>
         <div className="font-bold text-neutral-400 text-lg md:text-2xl lg:text-3xl text-center">
           {info.weather[0].main}
