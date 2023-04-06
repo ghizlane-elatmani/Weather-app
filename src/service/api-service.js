@@ -18,14 +18,14 @@ export async function getCurrentWeatherByLocation(lat, lon, unit) {
 }
 
 export async function get5DaysWeatherForecastByCity(city, unit) {
-  const url = `${baseUrl}/forecast/daily?q=${city}&units=${unit}&appid=${apiKey}`;
+  const url = `${baseUrl}/forecast?q=${city}&units=${unit}&appid=${apiKey}`;
   const response = await axios.get(url);
 
   return response.data;
 }
 
 export async function get5DaysWeatherForecastByLocation(lat, lon, unit) {
-  const url = `${baseUrl}/forecast/daily?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
+  const url = `${baseUrl}/forecast?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
   const response = await axios.get(url);
 
   return response.data;

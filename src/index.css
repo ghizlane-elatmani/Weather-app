@@ -11,6 +11,12 @@
   animation-direction: alternate-reverse;
 }
 
+.grid-adaptive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
 @keyframes echo-ping {
   from {
     border-color: transparent;

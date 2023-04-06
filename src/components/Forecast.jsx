@@ -1,23 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import CardList from "./CardList";
 import { TiLocationArrow } from "react-icons/ti";
+import { getDays, toTextualDescription } from "../service/filter-service";
 
 const Forecast = ({ units, setUnits, info, infoDays }) => {
-  function toTextualDescription(degree) {
-    if (degree > 337.5) return "N";
-    if (degree > 292.5) return "NW";
-    if (degree > 247.5) return "W";
-    if (degree > 202.5) return "W";
-    if (degree > 157.5) return "S";
-    if (degree > 122.5) return "S";
-    if (degree > 67.5) return "E";
-    if (degree > 22.5) return "NE";
-    return "N";
-  }
+  const [forecast, setForecast] = useState(null);
+
+  useEffect(() => {
+    if (infoDays) setForecast(getDays(infoDays.list));
+  }, [infoDays]);
 
   return (
     <div className="grow py-5 px-5 md:px-10 lg:px-[11rem] bg-slate-900">
       {/* Celcius | Fahrenheit*/}
-      <div className="flex justify-end gap-3">
+      <div className="flex justify-end gap-3 mb-10">
         <button
           onClick={() => setUnits("metric")}
           className={`bg-neutral-500 hover:bg-neutral-600 duration w-10 h-10 rounded-full flex justify-center items-center ${
@@ -41,9 +37,7 @@ const Forecast = ({ units, setUnits, info, infoDays }) => {
       </div>
 
       {/* Weather 5 days */}
-      <ul>
-        <li></li>
-      </ul>
+      <CardList forecast={forecast} units={units} />
 
       {/* Today's Hightlights */}
       <div className="mb-5">
