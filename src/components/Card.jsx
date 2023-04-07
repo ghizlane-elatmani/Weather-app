@@ -5,6 +5,8 @@ const Card = ({ dayInfo, isItTomorrow, units }) => {
     console.log(dayInfo);
   }, []);
 
+  if (!dayInfo) return null;
+
   return (
     <li className="min-w-[100px] bg-slate-800 p-2 rounded-sm flex flex-col items-center gap-2">
       <p>{isItTomorrow ? "Tomorrow" : dayInfo[0]}</p>

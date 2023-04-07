@@ -10,6 +10,12 @@ const CardList = ({ forecast, units }) => {
 
   useEffect(() => {
     if (forecast) {
+      // console.log(">>> : ", forecast);
+
+      // Array.from(forecast.entries()).forEach(([key, value]) => {
+      //   console.log("key: ", key + "#value:", value);
+      // });
+
       const iterator1 = forecast.entries();
       iterator1.next().value;
 
@@ -20,6 +26,8 @@ const CardList = ({ forecast, units }) => {
       setday4(iterator1.next().value);
     }
   }, [forecast]);
+
+  if (!forecast) return null;
 
   return (
     <ul className=" grid-adaptive mb-10">
