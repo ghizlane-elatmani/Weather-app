@@ -37,7 +37,7 @@
 
 ## Overview
 
-![My Image](/src/img/weather.png)
+![My Image](/src/image/weather.png)
 
 You can see my demo here: "https://weather-app-ge.netlify.app/". Thanks to this project, I practise my skills as a Front-end developer using React. I learn how to setup a project with vite and how to work with tailwind css. I hope to make more useful websites with beautiful design in the future :)
 
