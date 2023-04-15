@@ -18,6 +18,7 @@ function App() {
   const [infoDays, setInfoDays] = useState(null);
   const [isLocation, setIsLocation] = useState(false);
 
+  // API request
   useEffect(() => {
     if (isLocation) {
       getCurrentWeatherByLocation(lat, lon, units).then((data) =>
@@ -35,30 +36,33 @@ function App() {
     return () => {};
   }, [city, units, isLocation]);
 
+  // Return a Loader
+  if (!info && !infoDays) {
+    return (
+      <div className="bg-slate-800 w-full min-h-screen flex justify-center items-center">
+        <BeatLoader color="#10b981" />
+      </div>
+    );
+  }
+
+  // Return the UI
   return (
     <div className="text-slate-50 md:flex">
-      {!info && !infoDays ? (
-        <div className="bg-slate-800 w-full min-h-screen flex justify-center items-center">
-          <BeatLoader color="#10b981" />
-        </div>
-      ) : (
-        <>
-          <Sidebar
-            info={info}
-            units={units}
-            setCity={setCity}
-            setIsLocation={setIsLocation}
-            setLat={setLat}
-            setLon={setLon}
-          />
-          <Forecast
-            units={units}
-            setUnits={setUnits}
-            info={info}
-            infoDays={infoDays}
-          />
-        </>
-      )}
+      <Sidebar
+        info={info}
+        units={units}
+        setCity={setCity}
+        setIsLocation={setIsLocation}
+        setLat={setLat}
+        setLon={setLon}
+      />
+
+      <Forecast
+        units={units}
+        setUnits={setUnits}
+        info={info}
+        infoDays={infoDays}
+      />
     </div>
   );
 }
